@@ -63,7 +63,12 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
     }
 
     try {
-        const response = await fetch("http://127.0.0.1:8000/login", {
+        // تحديد رابط السيرفر تلقائياً (محلي أثناء التطوير، وعلى Render عند النشر)
+        const API_BASE_URL = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+            ? "http://127.0.0.1:8000"
+            : "https://engiflow-backend.onrender.com";
+
+        const response = await fetch(`${API_BASE_URL}/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
