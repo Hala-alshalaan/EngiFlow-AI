@@ -1,0 +1,231 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EngiFlow AI | Client Dashboard</title>
+
+    <!-- SweetAlert2 للرسايل الاحترافية -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #101C2C;
+            color: white;
+        }
+
+        header {
+            padding: 22px 7%;
+            border-bottom: 1px solid #304156;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(16, 28, 44, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+
+        .logo span {
+            color: #C6A36B;
+        }
+
+        .user-badge {
+            background: #17283B;
+            border: 1px solid #304156;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            color: #DCC18F;
+        }
+
+        main {
+            padding: 60px 7%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .welcome {
+            color: #C6A36B;
+            font-size: 12px;
+            letter-spacing: 2.5px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-size: 38px;
+            margin: 12px 0;
+            font-weight: 700;
+        }
+
+        p.description {
+            color: #AAB4C2;
+            line-height: 1.8;
+            font-size: 16px;
+            max-width: 600px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .card {
+            padding: 30px;
+            background: #17283B;
+            border: 1px solid #304156;
+            border-radius: 14px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #C6A36B;
+            box-shadow: 0 10px 25px -5px rgba(198, 163, 107, 0.15);
+        }
+
+        .card h3 {
+            color: #DCC18F;
+            margin-bottom: 12px;
+            font-size: 20px;
+        }
+
+        .card p {
+            color: #AAB4C2;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .logout-btn {
+            margin-top: 40px;
+            padding: 12px 28px;
+            background: transparent;
+            color: #ef4444;
+            border: 1px solid #ef4444;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .logout-btn:hover {
+            background: #ef4444;
+            color: white;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">EngiFlow <span>AI</span></div>
+        <div class="user-badge" id="userBadge">Client Portal</div>
+    </header>
+
+    <main>
+        <span class="welcome">YOUR PROJECT WORKSPACE</span>
+
+        <h1 id="welcomeName">Welcome, Client</h1>
+
+        <p class="description">
+            Follow your engineering project seamlessly, track milestones, and stay updated throughout every stage with AI-driven insights.
+        </p>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>My Project</h3>
+                <p>View your engineering project structural details, blueprints, and general information.</p>
+            </div>
+
+            <div class="card">
+                <h3>Project Progress</h3>
+                <p>Track live timeline completion rates and milestone updates of your project.</p>
+            </div>
+
+            <div class="card">
+                <h3>Reports & AI Insights</h3>
+                <p>Examine automated engineering reports, analytics, and safety compliance checks.</p>
+            </div>
+
+            <div class="card">
+                <h3>Contact Engineer</h3>
+                <p>Stay directly connected with your assigned engineering office and project manager.</p>
+            </div>
+
+        </div>
+
+        <button class="logout-btn" onclick="confirmLogout()">Log Out</button>
+    </main>
+
+    <script>
+        // 1. التحقق من جلسة المستخدم المخزنة في الـ LocalStorage عند تسجيل الدخول
+        const currentUser = JSON.parse(
+            localStorage.getItem("engiflowCurrentUser") || "null"
+        );
+
+        // التحقق إن كان المستخدم مسجل دخول وصلاحياته صحيحة
+        if (!currentUser) {
+            window.location.replace("login.html");
+        } else {
+            // عرض اسم المستخدم القادم من قاعدة البيانات ديناميكياً
+            const displayName = currentUser.name || currentUser.fullname || "Client";
+            document.getElementById("welcomeName").textContent = "Welcome, " + displayName;
+            document.getElementById("userBadge").textContent = (currentUser.account_type || currentUser.role || "client").toUpperCase();
+        }
+
+        // 2. دالة تسجيل الخروج الاحترافية باستخدام SweetAlert2
+        function confirmLogout() {
+            Swal.fire({
+                title: 'هل أنت متأكد من تسجيل الخروج؟',
+                text: "سيتم إنهاء الجلسة الحالية وإرجاعك لصفحة تسجيل الدخول.",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#C6A36B',
+                cancelButtonColor: '#304156',
+                confirmButtonText: 'نعم، تسجيل الخروج',
+                cancelButtonText: 'إلغاء',
+                background: '#17283B',
+                color: '#ffffff'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    localStorage.removeItem("engiflowCurrentUser");
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'تم تسجيل الخروج بنجاح',
+                        showConfirmButton: false,
+                        timer: 1500,
+                        background: '#17283B',
+                        color: '#ffffff'
+                    }).then(() => {
+                        window.location.href = "login.html";
+                    });
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>

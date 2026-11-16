@@ -1,0 +1,291 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EngiFlow AI | Sign Up</title>
+    <link rel="stylesheet" href="Signup.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+
+    <div class="signup-page">
+
+        <!-- LEFT PANEL -->
+        <section class="visual-panel">
+            <div class="visual-overlay"></div>
+
+            <div class="visual-content">
+                <a href="index.html" class="logo">
+                    EngiFlow <span>AI</span>
+                </a>
+
+                <div class="visual-message">
+                    <span class="small-title">AI POWERED ENGINEERING</span>
+
+                    <h1>
+                        Build Your <span>Future.</span>
+                    </h1>
+
+                    <p>
+                        Join EngiFlow AI and experience a smarter
+                        way to manage engineering projects,
+                        from planning to execution.
+                    </p>
+                </div>
+
+               
+            </div>
+        </section>
+
+
+        <!-- RIGHT PANEL -->
+        <section class="form-panel">
+
+            <div class="signup-card">
+
+                <a href="index.html" class="mobile-logo">
+                    EngiFlow <span>AI</span>
+                </a>
+
+                <div class="heading">
+                    <span class="welcome">GET STARTED</span>
+
+                    <h2>Create Account</h2>
+
+                    <p>
+                        Create your account and start your
+                        engineering journey with us.
+                    </p>
+                </div>
+
+
+                <form id="signupForm">
+
+                    <!-- STEP 1: ACCOUNT TYPE -->
+                    <div class="account-selection">
+
+                        <h3>Choose Your Account Type</h3>
+                        <p>Select how you want to use ENGAIFlow AI</p>
+
+                        <div class="account-cards">
+
+                            <button type="button"
+                                    class="account-card"
+                                    data-type="user">
+
+                                <span class="account-icon">👤</span>
+                                <h3>User</h3>
+                                <p>Create a personal account</p>
+                                <span class="account-label">Personal</span>
+
+                            </button>
+
+                            <button type="button"
+                                    class="account-card"
+                                    data-type="office">
+
+                                <span class="account-icon">🏢</span>
+                                <h3>Engineering Office</h3>
+                                <p>Register your engineering office</p>
+                                <span class="account-label">Business</span>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- USER FORM -->
+                    <div id="userForm" class="account-form" hidden>
+
+                        <h3>Personal Information</h3>
+
+                        <div class="field">
+                            <label>First Name</label>
+                            <input type="text" name="firstName"
+                                   placeholder="Enter your first name" disabled required>
+                        </div>
+
+                        <div class="field">
+                            <label>Last Name</label>
+                            <input type="text" name="lastName"
+                                   placeholder="Enter your last name" disabled required>
+                        </div>
+
+                        <div class="field">
+                            <label>Email Address</label>
+                            <input type="email" name="userEmail"
+                                   placeholder="name@example.com" disabled required>
+                        </div>
+
+                        <div class="field">
+                            <label>Phone Number</label>
+                            <input type="tel" name="userPhone"
+                                   placeholder="07XXXXXXXX"
+                                   maxlength="10" minlength="10"
+                                   pattern="07[0-9]{8}"
+                                   inputmode="numeric" disabled required>
+                        </div>
+
+                        <div class="field">
+                            <label>Password</label>
+                            <input type="password" name="userPassword"
+                                   placeholder="Create a password" disabled required>
+                        </div>
+
+                    </div>
+
+
+                    <!-- ENGINEERING OFFICE FORM -->
+                    <div id="officeForm" class="account-form" hidden>
+
+                        <h3>Engineering Office Information</h3>
+
+                        <div class="field">
+                            <label>Office Name</label>
+                            <input type="text" name="officeName"
+                                   placeholder="Enter office name" disabled required>
+                        </div>
+
+                        <div class="field">
+                            <label>License Number</label>
+                            <input type="text" name="licenseNumber"
+                                   placeholder="Enter license number" disabled required>
+                        </div>
+
+                        <div class="field">
+                            <label>Contact Email</label>
+                            <input type="email" name="officeEmail"
+                                   placeholder="office@example.com" disabled required>
+                        </div>
+
+                        <div class="field">
+                            <label>Phone Number</label>
+                            <input type="tel" name="officePhone"
+                                   placeholder="07XXXXXXXX"
+                                   maxlength="10" minlength="10"
+                                   pattern="07[0-9]{8}"
+                                   inputmode="numeric" disabled required>
+                        </div>
+
+                        <div class="field">
+                            <label>Office Address</label>
+                            <input type="text" name="officeAddress"
+                                   placeholder="Enter office address" disabled required>
+                        </div>
+
+                        <div class="field">
+                            <label>Password</label>
+                            <input type="password" name="officePassword"
+                                   placeholder="Create a password" disabled required>
+                        </div>
+
+                    </div>
+
+
+                    <!-- SELECTED ACCOUNT TYPE -->
+                    <input type="hidden" id="selectedAccountType"
+                           name="accountType" value="">
+
+                    <button type="submit" class="signup-button" id="signupButton" hidden>
+                        Create Account <span>→</span>
+                    </button>
+
+                </form>
+
+
+
+                <p class="login-link">
+                    Already have an account?
+                    <a href="login.html">Sign In</a>
+                </p>
+
+                <a href="index.html" class="back-home">
+                    ← Back to Home
+                </a>
+
+            </div>
+        </section>
+
+    </div>
+
+<script>
+const accountCards = document.querySelectorAll(".account-card");
+const userForm = document.getElementById("userForm");
+const officeForm = document.getElementById("officeForm");
+const selectedType = document.getElementById("selectedAccountType");
+const signupButton = document.getElementById("signupButton");
+
+accountCards.forEach(card => {
+    card.addEventListener("click", function() {
+        accountCards.forEach(item => {
+            item.classList.remove("active");
+        });
+
+        this.classList.add("active");
+        const type = this.dataset.type;
+        selectedType.value = type;
+
+        if (userForm) userForm.hidden = (type !== "user");
+        if (officeForm) officeForm.hidden = (type !== "office");
+
+        if (userForm) {
+            userForm.querySelectorAll("input").forEach(input => {
+                input.disabled = (type !== "user");
+            });
+        }
+
+        if (officeForm) {
+            officeForm.querySelectorAll("input").forEach(input => {
+                input.disabled = (type !== "office");
+            });
+        }
+
+        if (signupButton) signupButton.hidden = false;
+    });
+});
+
+document.getElementById("signupForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+    const accountType = selectedType.value;
+
+    if (!accountType) {
+        alert("Please select an account type.");
+        return;
+    }
+
+    if (!this.reportValidity()) {
+        return;
+    }
+
+    const formData = new FormData(this);
+    const data = Object.fromEntries(formData.entries());
+    data.accountType = accountType;
+
+    try {
+        const response = await fetch("http://127.0.0.1:8000/signup", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            alert(result.message);
+            window.location.href = "login.html";
+        } else {
+            alert(result.detail || "حدث خطأ أثناء التسجيل");
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        alert("تعذر الاتصال بالسيرفر. تأكد أن السيرفر يعمل.");
+    }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engineering Office Portal | EngiFlow AI</title>
+    <link rel="stylesheet" href="engineer-dashboard.css">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div>
+            <div class="brand">
+                <a href="index.html" class="logo">Engi<span>Flow</span> AI</a>
+                <span class="office-badge">Engineering Office</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#" class="active">📊 Office Overview</a></li>
+                <li><a href="#">📁 Client Submissions</a></li>
+                <li><a href="#">📐 CAD & Blueprint AI</a></li>
+                <li><a href="#">💰 BOQ Estimator</a></li>
+                <li><a href="#">🏢 Office Profile</a></li>
+            </ul>
+        </div>
+        <button class="logout-btn" id="logoutBtn">Log Out</button>
+    </aside>
+
+    <main class="main-content">
+        <header class="top-bar">
+            <div class="header-info">
+                <h1>Office Portal: <span id="officeNameDisplay" style="color: #eab308;">Engineering Office</span></h1>
+                <p>Manage incoming client projects, AI blueprint audits, and cost proposals.</p>
+            </div>
+            <div class="status-indicator">
+                <span class="dot"></span>
+                AI Multi-Agent Engine Online
+            </div>
+        </header>
+
+        <section class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-title">Total Active Projects</div>
+                <div class="kpi-value">12</div>
+                <span class="kpi-trend">+3 this week</span>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-title">Pending Client Requests</div>
+                <div class="kpi-value">4</div>
+                <span class="kpi-trend" style="color: #eab308;">Requires action</span>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-title">AI Blueprint Audits</div>
+                <div class="kpi-value">28</div>
+                <span class="kpi-trend">98.4% accuracy</span>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-title">Estimated Revenue</div>
+                <div class="kpi-value">$45,200</div>
+                <span class="kpi-trend">+14% vs last month</span>
+            </div>
+        </section>
+
+        <section class="section-card">
+            <div class="section-header">
+                <h2>Recent Client Project Requests</h2>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Project ID</th>
+                        <th>Client Name</th>
+                        <th>Project Type</th>
+                        <th>AI Pre-Check</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="projectsTableBody">
+                    <tr>
+                        <td>#ENG-1042</td>
+                        <td>Ahmad Al-Khatib</td>
+                        <td>Residential Villa (450m²)</td>
+                        <td>CAD Validated ✓</td>
+                        <td><span class="badge pending">Pending Review</span></td>
+                        <td><button class="action-btn" onclick="reviewProject('#ENG-1042')">Inspect</button></td>
+                    </tr>
+                    <tr>
+                        <td>#ENG-1041</td>
+                        <td>Sara Mansour</td>
+                        <td>Commercial Complex</td>
+                        <td>BOQ Generated ✓</td>
+                        <td><span class="badge review">In Progress</span></td>
+                        <td><button class="action-btn" onclick="reviewProject('#ENG-1041')">Inspect</button></td>
+                    </tr>
+                    <tr>
+                        <td>#ENG-1039</td>
+                        <td>Tariq Haddad</td>
+                        <td>Structural Renovation</td>
+                        <td>Completed ✓</td>
+                        <td><span class="badge approved">Approved</span></td>
+                        <td><button class="action-btn" onclick="reviewProject('#ENG-1039')">View Report</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <script src="engineer-dashboard.js"></script>
+</body>
+</html>
